@@ -22,8 +22,6 @@
   with_items:
     - '# 4.1.7 Ensure events that modify date and time information are collected'
     - '-w /etc/selinux/ -p wa -k MAC-policy'
-  when:
-    ("'-w /etc/selinux/ -p wa -k MAC-policy' not in MAC-policy.stdout")
   tags:
     - "4.1.7"
     - level-2
