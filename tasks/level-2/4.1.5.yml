@@ -26,6 +26,8 @@
     - '-w /etc/gshadow -p wa -k identity'
     - '-w /etc/shadow -p wa -k identity'
     - '-w /etc/security/opasswd -p wa -k identity'
+    - '-w /etc/sudoers -p wa -k scope'
+    - '-w /etc/sudoers.d/ -p wa -k scope'
   tags:
     - "4.1.5"
     - level-2
