@@ -24,10 +24,6 @@
     - '-w /var/run/utmp -p wa -k session'
     - '-w /var/log/wtmp -p wa -k session'
     - '-w /var/log/btmp -p wa -k session'
-  when:
-    ("'-w /var/run/utmp -p wa -k session' not in session.stdout") or
-    ("'-w /var/log/wtmp -p wa -k session' not in session.stdout") or
-    ("'-w /var/log/btmp -p wa -k session' not in session.stdout")
   tags:
     - "4.1.9"
     - level-2
