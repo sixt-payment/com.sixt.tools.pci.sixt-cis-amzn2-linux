@@ -4,37 +4,11 @@
 # 3.5.2.2 Ensure IPv6 loopback traffic is configured 
 
 - name: 3.5.2.2- Ensure IPv6 loopback traffic is configured (-i lo)
-  iptables:
-    chain: INPUT
-    in_interface: "lo"
-    jump: ACCEPT
-    ip_version: ipv6
-  become: yes
-  tags:
-    - level-1
-    - section-3
-    - "3.5.2.2"
-    - scored
-
-- name: 3.5.2.2- Ensure IPv6 loopback traffic is configured (-o lo)
-  iptables:
-    chain: OUTPUT
-    out_interface: "lo"
-    jump: ACCEPT
-    ip_version: ipv6
-  become: yes
-  tags:
-    - level-1
-    - section-3
-    - "3.5.2.2"
-    - scored
-
-- name: 3.5.2.2- Ensure IPv6 loopback traffic is configured (-s 127.0.0.1/8)
-  iptables:
-    chain: INPUT
-    source: ::1
-    jump: DROP
-    ip_version: ipv6
+  command: "{{ item }}"
+  with_items:
+    - "ip6tables -A INPUT -i lo -j ACCEPT"
+    - "ip6tables -A OUTPUT -o lo -j ACCEPT"
+    - "ip6tables -A INPUT -s ::1 -j DROP"
   become: yes
   tags:
     - level-1
