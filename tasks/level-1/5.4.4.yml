@@ -20,14 +20,14 @@
     paths: /etc/profile.d
     patterns: '*.sh'
     file_type: file
-    recurse: yes
+    recurse: no
   register: files
 
 - name: 5.4.4 - Ensure default user umask is 027 or more restrictive
   lineinfile:
     regexp: "^umask\\s+"
     line: "umask {{ cis_umask_default }}"
-    dest: "{{ item }}"
+    dest: "{{ item.path }}"
   with_items: "{{ files.files }}"
   tags:
     - level-1
