@@ -19,7 +19,9 @@
   find:
     paths: /etc/profile.d
     patterns: '*.sh'
-    register: files
+    file_type: file
+    recurse: yes
+  register: files
 
 - name: 5.4.4 - Ensure default user umask is 027 or more restrictive
   lineinfile:
