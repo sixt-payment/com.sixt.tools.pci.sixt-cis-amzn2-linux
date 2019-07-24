@@ -22,9 +22,6 @@
     - '# 4.1.8 Ensure login and logout events are collected'
     - '-w /var/log/lastlog -p wa -k logins'
     - '-w /var/run/faillock/ -p wa -k logins'
-  when:
-   ("'-w /var/run/faillock/ -p wa -k logins' not in logins.stdout") or
-   ("'-w /var/log/lastlog -p wa -k logins' not in logins.stdout")
 
   tags:
     - "4.1.8"
