@@ -3,14 +3,9 @@
 
 # 5.3.3 Ensure password reuse is limited
 - name: 5.3.3 - Ensure password reuse is limited (/etc/pam.d/system-auth)
-  pamd:
-    name: system-auth
-    type: password
-    control: sufficient
-    module_path: pam_unix.so
-    new_control: sufficient
-    module_arguments: 'remember=5'
-    state: updated
+  lineinfile:
+    dest: "/etc/pam.d/system-auth"
+    line: "password  \tsufficient\tpam_unix.so remember=5"
   tags:
     - level-1
     - section-5
@@ -18,14 +13,9 @@
     - scored
 
 - name: 5.3.3 - Ensure password reuse is limited (/etc/pam.d/password-auth)
-  pamd:
-    name: password-auth
-    type: password
-    control: sufficient
-    module_path: pam_unix.so
-    new_control: sufficient
-    module_arguments: 'remember=5'
-    state: updated
+  lineinfile:
+    dest: "password-auth"
+    line: "password  \tsufficient\tpam_unix.so remember=5"
   tags:
     - level-1
     - section-5
