@@ -14,3 +14,23 @@
     - section-5
     - "5.4.4"
     - scored
+    
+- name: Find etc/profile.d files
+  find:
+    paths: /etc/profile.d
+    patterns: '*.sh'
+    file_type: file
+    recurse: no
+  register: files
+
+- name: 5.4.4 - Ensure default user umask is 027 or more restrictive
+  lineinfile:
+    regexp: "^umask\\s+"
+    line: "umask {{ cis_umask_default }}"
+    dest: "{{ item.path }}"
+  with_items: "{{ files.files }}"
+  tags:
+    - level-1
+    - section-5
+    - "5.4.4"
+    - scored
